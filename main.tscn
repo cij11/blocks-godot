@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://da7js4by62nq8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.7660444, -0.5566705, 0.3213938, 2.7805946e-08, 0.49999994, 0.86602545, -0.64278764, 0.66341394, -0.3830222, -3.9, 7, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 2.8000002, 0)
+mesh = SubResource("BoxMesh_7dm0k")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7660445, 0.64278764, 0, -0.64278764, 0.7660445, 0, 4.3, 3.4999998)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(5.25, 0, 0, 0, 1.72, 0, 0, 0, 2.5542004, 7.450581e-09, 1.7200003, -3.0960002)
+use_collision = true
+size = Vector3(1, 1.8000001, 0.2)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(0.19999999, 0, 0, 0, -1.2808453e-08, -0.6104651, 0, 0.197322, -1.7969207e-08, -1.4191582e-09, 0.2209301, 0.018009543)
+operation = 2
+height = 3.1000001
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(15.7, 0, 0, 0, 1, 0, 0, 0, 9.900001, 0, 0, 0)
